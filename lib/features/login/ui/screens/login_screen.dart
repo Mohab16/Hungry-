@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry/core/helpers/spacing.dart';
-import 'package:hungry/core/themes/my_colors.dart';
 import 'package:hungry/core/themes/my_styles.dart';
 import 'package:hungry/features/login/ui/widgets/dont_have_an_account.dart';
 import 'package:hungry/features/login/ui/widgets/email_and_password.dart';

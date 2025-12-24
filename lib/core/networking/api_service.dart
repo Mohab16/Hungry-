@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:hungry/core/networking/api_constants.dart';
+import 'package:hungry/features/home/data/models/home_products_model.dart';
 import 'package:hungry/features/login/data/models/login_request_body_model.dart';
 import 'package:hungry/features/login/data/models/login_response_model.dart';
 import 'package:hungry/features/signup/data/models/signup_request_body_model.dart';
@@ -20,5 +21,10 @@ Future<LoginResponseModel> login(
 @POST(ApiConstants.register)
 Future<SignupResponseModel> signup(
  @Body() SignupRequestBodyModel signupRequestBody,
+);
+
+@GET(ApiConstants.homeproducts)
+Future <HomeProductsModel> fetchProducts(
+  @Header("Authorization") String? token
 );
 }

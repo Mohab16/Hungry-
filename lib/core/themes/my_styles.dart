@@ -11,6 +11,12 @@ class MyStyles {
     fontWeight: FontWeightHelper.medium,
     color: MyColors.darkGreen,
   );
+  static TextStyle font12RobotoWhiteMedium=TextStyle(
+     fontFamily: "Roboto",
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: Colors.white
+  );
   static TextStyle font15RobotoDarkGreenSemiBold=TextStyle(
      fontFamily: "Roboto",
     fontSize: 15.sp,
@@ -22,6 +28,42 @@ class MyStyles {
     fontSize: 15.sp,
     fontWeight: FontWeightHelper.semiBold,
     color: Colors.white,
+  );
+  static TextStyle font14RobotoRedBricksRegular=TextStyle(
+     fontFamily: "Roboto",
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: MyColors.redBricks,
+  );
+  static TextStyle font16RobotoRedBricksSemiBold=TextStyle(
+     fontFamily: "Roboto",
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: MyColors.redBricks,
+  );
+  static TextStyle font16RobotoRedBricksMedium=TextStyle(
+     fontFamily: "Roboto",
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: MyColors.redBricks,
+  );
+  static TextStyle font16RobotoRedBricksBold=TextStyle(
+     fontFamily: "Roboto",
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: MyColors.redBricks,
+  );
+  static TextStyle font16RobotoRedBricksRegular=TextStyle(
+     fontFamily: "Roboto",
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: MyColors.redBricks,
+  );
+  static TextStyle font18RobotoRedBricksSemiBold=TextStyle(
+     fontFamily: "Roboto",
+    fontSize: 18.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: MyColors.redBricks,
   );
   static TextStyle font15RobotoLightGreySemiBold=TextStyle(
      fontFamily: "Roboto",
@@ -35,6 +77,30 @@ class MyStyles {
     fontWeight: FontWeightHelper.medium,
     color: MyColors.lightGrey,
   );
+  static TextStyle font16RobotoLighterGreyMedium=TextStyle(
+     fontFamily: "Roboto",
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: MyColors.lighterGrey,
+  );
+  static TextStyle font16RobotoWhiteMedium=TextStyle(
+     fontFamily: "Roboto",
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: Colors.white,
+  );
+  static TextStyle font16RobotoDarkGreenMedium=TextStyle(
+     fontFamily: "Roboto",
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: MyColors.darkGreen,
+  );
+  static TextStyle font16RobotoDarkGreyMedium=TextStyle(
+     fontFamily: "Roboto",
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: MyColors.darkGrey,
+  );
   static TextStyle font18RobotoDarkGreenSemiBold=TextStyle(
      fontFamily: "Roboto",
     fontSize: 18.sp,
@@ -45,7 +111,7 @@ class MyStyles {
      fontFamily: "Roboto",
     fontSize: 18.sp,
     fontWeight: FontWeightHelper.semiBold,
-    color: Colors.white,
+    color: MyColors.lightestGrey,
   );
   static TextStyle font20RobotoDarkGreenBold=TextStyle(
      fontFamily: "Roboto",
@@ -53,21 +119,46 @@ class MyStyles {
     fontWeight: FontWeightHelper.bold,
     color: MyColors.darkGreen,
   );
-  static TextStyle font16RobotoDarkGreenMedium=TextStyle(
+  static TextStyle font14RobotoRedBricksMedium=TextStyle(
      fontFamily: "Roboto",
-    fontSize: 16.sp,
-    fontWeight: FontWeightHelper.medium,
-    color: MyColors.darkGreen,
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: MyColors.redBricks,
   );
-  static TextStyle font16RobotoWhiteMedium=TextStyle(
+ 
+  
+  static TextStyle font18RobotoRedBricksMedium=TextStyle(
      fontFamily: "Roboto",
-    fontSize: 16.sp,
+    fontSize: 18.sp,
     fontWeight: FontWeightHelper.medium,
-    color: Colors.white,
+    color: MyColors.redBricks,
+  );
+  static TextStyle font18PoppinsDarkGreyMedium=TextStyle(
+     fontFamily: "Poppins",
+    fontSize: 18.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: MyColors.darkGrey,
   );
   static TextStyle font60LuckiestGuyDarkGreenMedium=TextStyle(
      fontFamily: "LuckiestGuy",
     fontSize: 60.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: MyColors.darkGreen,
+  );
+  static TextStyle font32ReemKufiInkDarkGreen=TextStyle(
+     fontFamily: "Poppins",
+    fontSize: 32.sp,
+    color: MyColors.darkGreen,
+  );
+  static TextStyle font32ReemKufiInkBlack=TextStyle(
+     fontFamily: "Poppins",
+    fontSize: 32.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: Colors.black,
+  );
+  static TextStyle font50LuckiestGuyDarkGreenRegular=TextStyle(
+     fontFamily: "LuckiestGuy",
+    fontSize: 50.sp,
     fontWeight: FontWeightHelper.regular,
     color: MyColors.darkGreen,
   );

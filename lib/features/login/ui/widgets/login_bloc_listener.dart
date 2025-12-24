@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hungry/core/helpers/extensions.dart';
+import 'package:hungry/core/routing/routes.dart';
 import 'package:hungry/core/themes/my_colors.dart';
 import 'package:hungry/core/themes/my_styles.dart';
 import 'package:hungry/features/login/logic/cubit/login_cubit.dart';
@@ -26,6 +27,7 @@ class LoginBlocListener extends StatelessWidget {
           ),
           success: (loginResponse) {
             context.pop();
+            context.pushNamed(Routes.homeScreen);
           },
           error: (error) {
             setupErrorState(context, error);

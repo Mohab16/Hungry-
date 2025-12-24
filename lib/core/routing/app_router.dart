@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hungry/core/di/dependency_injection.dart';
 import 'package:hungry/core/routing/routes.dart';
+import 'package:hungry/features/cart/ui/screens/cart_screen.dart';
+import 'package:hungry/features/home/logic/cubit/home_products_cubit.dart';
+import 'package:hungry/features/home/ui/screens/home_screen.dart';
+import 'package:hungry/features/home/ui/screens/product_details_screen.dart';
 import 'package:hungry/features/login/logic/cubit/login_cubit.dart';
 import 'package:hungry/features/login/ui/screens/login_screen.dart';
 import 'package:hungry/features/onboarding/ui/screens/onboarding_screen.dart';
@@ -29,6 +33,17 @@ class AppRouter {
             child: SignupScreen(),
           ),
         );
+      case Routes.homeScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<HomeProductsCubit>(),
+            child: HomeScreen(),
+          ),
+        );
+        case Routes.productDetailsScreen:
+        return MaterialPageRoute(builder:(context) => ProductDetailsScreen(),);
+        case Routes.cartScreen:
+        return MaterialPageRoute(builder:(context) => CartScreen(),);
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
