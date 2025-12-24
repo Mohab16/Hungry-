@@ -33,4 +33,19 @@ class LocalStorage {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_userName);
   }
+  static const _userImage="userImage";
+
+  static Future<void> saveUserImage(String userImage) async {
+    final prefs=await SharedPreferences.getInstance();
+    await prefs.setString(_userImage, userImage);
+  }
+
+  static Future<String?> getUserImage() async{
+    final prefs= await SharedPreferences.getInstance();
+    return prefs.getString(_userImage);
+  }
+   static Future<void> clearUserImagee() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_userImage);
+  }
 }

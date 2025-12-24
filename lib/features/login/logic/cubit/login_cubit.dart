@@ -6,7 +6,6 @@ import 'package:hungry/features/login/data/repos/login_repo.dart';
 import 'package:hungry/features/login/logic/cubit/login_state.dart';
 
 
-
 class LoginCubit extends Cubit<LoginState> {
   TextEditingController emailController=TextEditingController();
   TextEditingController passwordController=TextEditingController();
@@ -18,6 +17,7 @@ class LoginCubit extends Cubit<LoginState> {
     final response= await _loginRepo.login(loginRequestBody);
     response.when(
       success:(data) {
+       
         emit(LoginState.success(data));
       },
        failure:(error) {
