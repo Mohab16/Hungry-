@@ -100,7 +100,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
     if (formKey1.currentState!.validate()) {
       context.read<LoginCubit>().emitLoginState(
         LoginRequestBodyModel(
-          email: emailController.text,
+          email: emailController.text.toLowerCase(),
           password: passwordController.text,
         ),
       );
