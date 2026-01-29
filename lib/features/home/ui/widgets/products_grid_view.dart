@@ -44,13 +44,21 @@ class ProductsGridView extends StatelessWidget {
             return Skeletonizer(
               enabled: isLoading,
               child: GestureDetector(
-                onTap: () => context.pushNamed(Routes.productDetailsScreen),
-                child: ProductItem(product: state.maybeWhen(
-                  success: (data) => data[index],
-                  orElse: () => null,
-                ),),
-              )
-              );
+                onTap: () => context.pushNamed(
+                  Routes.productDetailsScreen,
+                  arguments: context
+                      .read<HomeProductsCubit>()
+                      .filteredProducts[index]
+                      ,
+                ),
+                child: ProductItem(
+                  product: state.maybeWhen(
+                    success: (data) => data[index],
+                    orElse: () => null,
+                  ),
+                ),
+              ),
+            );
           },
         );
       },

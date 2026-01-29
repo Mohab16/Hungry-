@@ -8,9 +8,9 @@ class HomeProductsRepo {
 
   HomeProductsRepo(this._apiService);
 
-  Future <ApiResult<HomeProductsModel>> fetchProducts (String? token) async{
+  Future <ApiResult<HomeProductsModel>> fetchProducts () async{
    try {
-          final response = await _apiService.fetchProducts(token);
+          final response = await _apiService.fetchProducts();
           return ApiResult.success(response);
 
    }catch(error){

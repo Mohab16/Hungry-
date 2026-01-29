@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hungry/core/networking/api_result.dart';
 import 'package:hungry/core/storage/local_storage.dart';
-import 'package:hungry/features/home/data/repo/home_products_repo.dart';
+import 'package:hungry/features/home/data/repos/home_products_repo.dart';
 import 'package:hungry/features/home/logic/cubit/home_products_state.dart';
 
 class HomeProductsCubit extends Cubit<HomeProductsState> {
@@ -35,7 +35,7 @@ class HomeProductsCubit extends Cubit<HomeProductsState> {
     print("$token\n $userName");
 
     emit(HomeProductsState.loading());
-    final response = await _homeProductsRepo.fetchProducts(token);
+    final response = await _homeProductsRepo.fetchProducts();
     response.when(
       success: (data) {
         allProducts=data.data!;

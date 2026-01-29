@@ -9,7 +9,8 @@ class TotalPrice extends StatelessWidget {
   final String price;
   final TextStyle? totalPriceTextStyle;
   final String? label;
-  const TotalPrice({super.key, required this.buttonText, required this.price, this.totalPriceTextStyle, this.label});
+  final Function? onPressed;
+  const TotalPrice({super.key, required this.buttonText, required this.price, this.totalPriceTextStyle, this.label, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +30,11 @@ class TotalPrice extends StatelessWidget {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                              text: "\$",
+                              text: "$price ",
                               style: MyStyles.font32ReemKufiInkDarkGreen,
                             ),
                             TextSpan(
-                              text: price,
+                              text: "LE",
                               style: totalPriceTextStyle?? MyStyles.font32ReemKufiInkBlack,
                             ),
                           ],
@@ -50,7 +51,9 @@ class TotalPrice extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                       )
                     ),
-                    onPressed: () {}, child: Text(buttonText,style: MyStyles.font18RobotoWhiteSemiBold,)
+                    onPressed: () {
+                     onPressed!();
+                    }, child: Text(buttonText,style: MyStyles.font18RobotoWhiteSemiBold,)
                     ),
                 ],
               ),

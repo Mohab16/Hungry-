@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hungry/core/helpers/extensions.dart';
-import 'package:hungry/core/routing/routes.dart';
+
 import 'package:hungry/core/themes/my_colors.dart';
 
 class BottomBar extends StatelessWidget {
