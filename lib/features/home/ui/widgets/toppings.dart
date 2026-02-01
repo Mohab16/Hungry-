@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,8 +15,8 @@ class Toppings extends StatelessWidget {
     return BlocBuilder<ToppingsCubit, ToppingsState>(
       builder: (context, state) {
         final isLoading = state.maybeWhen(
-          loading: () => true,
-          orElse: () => false,
+          success: (data) => false,
+          orElse: () => true,
         );
         return SizedBox(
           height: 120.h,
@@ -28,10 +27,10 @@ class Toppings extends StatelessWidget {
               itemCount: isLoading
                   ? 4
                   : state.when(
-                      initial: () => 4,
+                      initial: () => 0,
                       loading: () => 4,
                       success: (data) => data.length,
-                      error: (error) => 4,
+                      error: (error) => 0,
                     ),
               itemBuilder: (context, index) {
                 bool isSelected = true;
@@ -65,13 +64,14 @@ class Toppings extends StatelessWidget {
                     }
                   },
                   child: CustomCard(
+                    isLoading: isLoading,
                     image: state.maybeWhen(
                       success: (data) => toppings[index].image,
-                      orElse: () => null,
+                      orElse: () => "https://via.placeholder.com/150",
                     ),
                     cardLabel: state.maybeWhen(
                       success: (data) => toppings[index].name,
-                      orElse: () => null,
+                      orElse: () => "null",
                     ),
                     isFirstItem: index == 0 ? true : false,
                     isSelected: isSelected,

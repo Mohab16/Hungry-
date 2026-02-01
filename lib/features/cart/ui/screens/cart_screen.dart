@@ -52,7 +52,7 @@ class CartScreen extends StatelessWidget {
               children: [
                 findCartProducts().isEmpty
                     ? SizedBox(
-                        height: 680.h,
+                        height: 660.h,
                         child: Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -75,9 +75,9 @@ class CartScreen extends StatelessWidget {
                         productPrices,
                       ),
                 Padding(
-                  padding: EdgeInsets.only(top: 40.w),
+                  padding: EdgeInsets.only(top: 20.w),
                   child: TotalPrice(
-                    buttonText: "Checkout",
+                    buttonText: "Go to checkout",
                     price: state.totalPrice.toString(),
                     onPressed: (){
                       if(cartItems.isNotEmpty){
@@ -125,30 +125,32 @@ class CartScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
                             padding: EdgeInsets.only(left: 12.w, top: 12.h),
-                            child: Image.network(
-                              findCartProducts()[index].image,
-                              loadingBuilder:
-                                  (context, child, loadingProgress) {
-                                    if (loadingProgress == null) return child;
-
-                                    return Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  },
-                              errorBuilder: (context, error, stackTrace) {
-                                return Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              },
-                              width: 111.w,
-                              height: 102.h,
+                            child: ClipRRect(
+                              child: Image.network(
+                                findCartProducts()[index].image,
+                                loadingBuilder:
+                                    (context, child, loadingProgress) {
+                                      if (loadingProgress == null) return child;
+                              
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    },
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                },
+                                width: 111.w,
+                                height: 102.h,
+                              ),
                             ),
                           ),
                           Padding(
@@ -163,12 +165,12 @@ class CartScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      horizontalSpacing(80),
+                      Spacer(),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(top: 35.h),
+                            padding: EdgeInsets.only(top: 35.h,right: 20.w),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [

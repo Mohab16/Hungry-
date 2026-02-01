@@ -37,12 +37,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     return Scaffold(
       backgroundColor: MyColors.lightestGrey,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomBackButton(),
-              Column(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomBackButton(),
+            SingleChildScrollView(
+              child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -58,59 +58,59 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   ),
                 ],
               ),
-              verticalSpacing(50),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 20.w),
-                    child: Text(
-                      "Toppings",
-                      style: MyStyles.font18RobotoRedBricksSemiBold,
-                      textAlign: TextAlign.start,
-                    ),
+            ),
+            verticalSpacing(25),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 20.w),
+                  child: Text(
+                    "Toppings",
+                    style: MyStyles.font18RobotoRedBricksSemiBold,
+                    textAlign: TextAlign.start,
                   ),
-                  verticalSpacing(20),
-                  Toppings(),
-                  verticalSpacing(30),
-                  Padding(
-                    padding: EdgeInsets.only(left: 20.w),
-                    child: Text(
-                      "Side options",
-                      style: MyStyles.font18RobotoRedBricksSemiBold,
-                      textAlign: TextAlign.start,
-                    ),
+                ),
+                verticalSpacing(20),
+                Toppings(),
+                verticalSpacing(30),
+                Padding(
+                  padding: EdgeInsets.only(left: 20.w),
+                  child: Text(
+                    "Side options",
+                    style: MyStyles.font18RobotoRedBricksSemiBold,
+                    textAlign: TextAlign.start,
                   ),
-                  SideOptions(),
-                ],
-              ),
-              verticalSpacing(35),
-
-              TotalPrice(
-                buttonText: "Add to cart",
-                price: widget.product.price,
-                onPressed: () {
-                  context.read<CartCubit>().productId = widget.product.id;
-                  final selectedItem = OrderItem(
-                    productId: context.read<CartCubit>().productId,
-                    quantity: context.read<CartCubit>().quantity,
-                    spicy: context.read<CartCubit>().spicyLevel,
-                    toppings: context.read<CartCubit>().selectedToppings,
-                    sideOptions: context.read<CartCubit>().selectedSideOptions,
-                    price: double.parse(widget.product.price),
-                  );
-
-                  print(
-                    "productId: ${context.read<CartCubit>().productId}\nquantity: ${context.read<CartCubit>().quantity}\nsideOptions: ${context.read<CartCubit>().selectedSideOptions}\ntoppings: ${context.read<CartCubit>().selectedToppings}\nspicy: ${context.read<CartCubit>().spicyLevel}",
-                  );
-
-                  context.read<CartCubit>().addProduct(selectedItem, {
-                    selectedItem.productId: selectedItem.price,
-                  });
-                },
-              ),
-            ],
-          ),
+                ),
+                SideOptions(),
+              ],
+            ),
+            verticalSpacing(35),
+        
+            TotalPrice(
+              buttonText: "Add to cart",
+              price: widget.product.price,
+              onPressed: () {
+                context.read<CartCubit>().productId = widget.product.id;
+                final selectedItem = OrderItem(
+                  productId: context.read<CartCubit>().productId,
+                  quantity: context.read<CartCubit>().quantity,
+                  spicy: context.read<CartCubit>().spicyLevel,
+                  toppings: context.read<CartCubit>().selectedToppings,
+                  sideOptions: context.read<CartCubit>().selectedSideOptions,
+                  price: double.parse(widget.product.price),
+                );
+        
+                print(
+                  "productId: ${context.read<CartCubit>().productId}\nquantity: ${context.read<CartCubit>().quantity}\nsideOptions: ${context.read<CartCubit>().selectedSideOptions}\ntoppings: ${context.read<CartCubit>().selectedToppings}\nspicy: ${context.read<CartCubit>().spicyLevel}",
+                );
+        
+                context.read<CartCubit>().addProduct(selectedItem, {
+                  selectedItem.productId: selectedItem.price,
+                });
+              },
+            ),
+          ],
         ),
       ),
     );

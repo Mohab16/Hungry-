@@ -1,7 +1,6 @@
 import 'package:hungry/core/networking/api_error_handler.dart';
 import 'package:hungry/core/networking/api_result.dart';
 import 'package:hungry/core/networking/api_service.dart';
-import 'package:hungry/features/cart/data/models/order_item_model.dart';
 import 'package:hungry/features/checkout/data/models/checkout_body_model.dart';
 import 'package:hungry/features/checkout/data/models/checkout_response_model.dart';
 

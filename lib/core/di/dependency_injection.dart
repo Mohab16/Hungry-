@@ -13,6 +13,8 @@ import 'package:hungry/features/home/logic/cubit/side_options_cubit.dart';
 import 'package:hungry/features/home/logic/cubit/toppings_cubit.dart';
 import 'package:hungry/features/login/data/repos/login_repo.dart';
 import 'package:hungry/features/login/logic/cubit/login_cubit.dart';
+import 'package:hungry/features/my_orders/data/repos/my_orders_repo.dart';
+import 'package:hungry/features/my_orders/logic/cubit/my_orders_cubit.dart';
 import 'package:hungry/features/signup/data/repo/signup_repo.dart';
 import 'package:hungry/features/signup/logic/cubit/signup_cubit.dart';
 
@@ -44,6 +46,9 @@ Future<void> setupGetIt() async {
   //Checkout
   getIt.registerLazySingleton<CheckoutRepo>(() => CheckoutRepo(getIt<ApiService>()));
   getIt.registerFactory<CheckoutCubit>(() => CheckoutCubit(getIt<CheckoutRepo>()));
+  //My orders
+  getIt.registerLazySingleton<MyOrdersRepo>(() => MyOrdersRepo(getIt<ApiService>()));
+  getIt.registerFactory<MyOrdersCubit>(() => MyOrdersCubit(getIt<MyOrdersRepo>()));
   
 
 }

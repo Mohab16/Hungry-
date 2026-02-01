@@ -17,8 +17,8 @@ class SideOptions extends StatelessWidget {
     return BlocBuilder<SideOptionsCubit, SideOptionsState>(
       builder: (context, state) {
         final isLoading = state.maybeWhen(
-          loading: () => true,
-          orElse: () => false,
+          success: (data) => false,
+          orElse: () => true,
         );
         return SizedBox(
           height: 140.h,
@@ -65,14 +65,15 @@ class SideOptions extends StatelessWidget {
 
                   },
                   child: CustomCard(
+                    isLoading: isLoading,
                     totalCardHeigth: 116.h,
                     image: state.maybeWhen(
                         success:(data) => sideOptions[index].image,
-                        orElse: () => null,
+                        orElse: () => "https://via.placeholder.com/150",
                       ),
                     cardLabel: state.maybeWhen(
                         success:(data) => sideOptions[index].name,
-                        orElse: () => null,
+                        orElse: () => "null",
                       ),
                     addColor: MyColors.darkGreen,
                     isFirstItem: index == 0 ? true : false, isSelected: isSelected,

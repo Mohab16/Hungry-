@@ -181,6 +181,12 @@ class MyStyles {
     fontWeight: FontWeightHelper.regular,
     color: MyColors.darkGreen,
   );
+  static TextStyle font35LuckiestGuyDarkGreenRegular=TextStyle(
+     fontFamily: "LuckiestGuy",
+    fontSize: 35.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: MyColors.darkGreen,
+  );
   static TextStyle font32ReemKufiInkDarkGreen=TextStyle(
      fontFamily: "Poppins",
     fontSize: 32.sp,

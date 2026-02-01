@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry/core/helpers/spacing.dart';
 import 'package:hungry/core/themes/my_colors.dart';
 import 'package:hungry/core/themes/my_styles.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class CustomCard extends StatelessWidget {
   final double? totalCardHeigth;
@@ -11,13 +12,14 @@ class CustomCard extends StatelessWidget {
   final bool isFirstItem;
   final Color? addColor;
   final bool isSelected;
+  final bool isLoading;
   const CustomCard({
     super.key,
     this.totalCardHeigth,
     required this.image,
     required this.cardLabel,
     required this.isFirstItem,
-    this.addColor, required this.isSelected,
+    this.addColor, required this.isSelected, required this.isLoading,
   });
 
   @override
@@ -50,28 +52,30 @@ class CustomCard extends StatelessWidget {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 6.w, bottom: 13.h),
-                        child: cardLabel != null
+                        child: isLoading
                             ? Text(
-                                cardLabel!,
+                                "cardLabel",
                                 style: MyStyles.font12RobotoWhiteMedium,
                               )
-                            : Container(
-                                width: 40,
-                                height: 10,
-                                color: Colors.grey.shade300,
-                              ),
+                            :Text(
+                               cardLabel!,
+                                style: MyStyles.font12RobotoWhiteMedium,
+                              )
                       ),
                       Spacer(),
                       Padding(
                         padding: EdgeInsets.only(bottom: 13.h, right: 5.w),
-                        child: CircleAvatar(
-                          radius: 8.h,
-                          backgroundColor: addColor ?? MyColors.red,
-                          child: Center(
-                            child: Image.asset(
-                              "assets/images/plus_icon.png",
-                              width: 8.w,
-                              height: 8.h,
+                        child: IgnorePointer(
+                          ignoring: true,
+                          child: CircleAvatar(
+                            radius: 8.h,
+                            backgroundColor: addColor ?? MyColors.red,
+                            child: Center(
+                              child: Image.asset(
+                                "assets/images/plus_icon.png",
+                                width: 8.w,
+                                height: 8.h,
+                              ),
                             ),
                           ),
                         ),
@@ -92,26 +96,19 @@ class CustomCard extends StatelessWidget {
                 child: Center(
                   child: Padding(
                     padding: const EdgeInsets.all(6.0),
-                    child:image==null? Container(
-                      width: 55.w,
-                      height: 45.h,
-                      decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                    ): Image.network(
+                    child: Image.network(
                       image!,
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if(loadingProgress==null) return child;
-                        return Container(
-                          width: 55.w,
-                          height: 45.h,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        );
-                      },
+                      // loadingBuilder: (context, child, loadingProgress) {
+                      //   if(loadingProgress==null) return child;
+                      //   return Container(
+                      //     width: 55.w,
+                      //     height: 45.h,
+                      //     decoration: BoxDecoration(
+                      //       color: Colors.grey.shade300,
+                      //       borderRadius: BorderRadius.circular(8),
+                      //     ),
+                      //   );
+                      // },
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
                           width: 55.w,
