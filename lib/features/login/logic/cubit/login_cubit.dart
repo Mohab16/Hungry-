@@ -19,11 +19,20 @@ class LoginCubit extends Cubit<LoginState> {
       success:(data) {
        
         emit(LoginState.success(data));
+        close();
+    
       },
        failure:(error) {
          emit(LoginState.error(error: error.apiErrorModel.message));
        },
        );
   }
-
+  
+@override
+  Future<void> close() {
+    emailController.clear();
+    passwordController.clear();
+    return super.close();
+  }
 }
+

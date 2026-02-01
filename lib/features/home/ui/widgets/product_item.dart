@@ -31,17 +31,23 @@ class ProductItem extends StatelessWidget {
           children: [
             // الصورة
             Center(
-              child:product==null? Image.asset(
-                "assets/images/burger.png",
-                width: 100.w,
-                height: 100.h,
-                fit: BoxFit.contain,
+              child:product==null? ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.asset(
+                  "assets/images/burger.png",
+                  width: 100.w,
+                  height: 100.h,
+                  fit: BoxFit.contain,
+                ),
               ): 
-              Image.network(
-                product.image,
-                width: 100.w,
-                height: 100.h,
-                fit: BoxFit.contain,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.network(
+                  product.image,
+                  width: 100.w,
+                  height: 100.h,
+                  fit: BoxFit.contain,
+                ),
               )
             ),
     

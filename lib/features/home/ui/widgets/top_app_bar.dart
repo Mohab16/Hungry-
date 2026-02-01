@@ -22,8 +22,12 @@ class TopAppBar extends StatelessWidget {
       imageUrl,
       width: 60.w,
       height: 60.h,
+
       errorBuilder: (context, error, stackTrace) {
-        return CircularProgressIndicator();
+        return Image.network(imageUrl, width: 60.w, height: 60.h);
+      },
+      loadingBuilder: (context, child, loadingProgress) {
+        return Image.network(imageUrl, width: 60.w, height: 60.h);
       },
     );
   }
@@ -44,15 +48,8 @@ class TopAppBar extends StatelessWidget {
               Spacer(),
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: state.when(
-                  initial: () => userImage(
-                    "https://tse4.mm.bing.net/th/id/OIP.hGSCbXlcOjL_9mmzerqAbQHaHa?pid=Api&P=0&h=220",
-                  ),
-                  loading:() => userImage(
-                    "https://tse4.mm.bing.net/th/id/OIP.hGSCbXlcOjL_9mmzerqAbQHaHa?pid=Api&P=0&h=220",
-                  ), 
-                  success:(data)=> userImage("https://tse4.mm.bing.net/th/id/OIP.hGSCbXlcOjL_9mmzerqAbQHaHa?pid=Api&P=0&h=220"),
-                  error:(error) => userImage("https://tse4.mm.bing.net/th/id/OIP.hGSCbXlcOjL_9mmzerqAbQHaHa?pid=Api&P=0&h=220"),
+                child: userImage(
+                  "https://tse4.mm.bing.net/th/id/OIP.hGSCbXlcOjL_9mmzerqAbQHaHa?pid=Api&P=0&h=220",
                 ),
               ),
             ],

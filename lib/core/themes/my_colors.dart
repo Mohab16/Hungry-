@@ -10,4 +10,5 @@ class MyColors {
   static final Color mediumGrey=Color(0xFFF3F4F6);
   static final Color lightestGrey=Color(0xFFFFFFFF);
   static final Color red=Color(0xFFEF2A39);
+  static final Color moreMediumGrey=Color(0xFFF0F0F0);
 }
