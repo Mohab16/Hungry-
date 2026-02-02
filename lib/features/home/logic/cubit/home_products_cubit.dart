@@ -32,7 +32,6 @@ class HomeProductsCubit extends Cubit<HomeProductsState> {
     userName = await LocalStorage.getUserName();
     userImage = await LocalStorage.getUserImage();
 
-    print("$token\n $userName");
 
     emit(HomeProductsState.loading());
     final response = await _homeProductsRepo.fetchProducts();

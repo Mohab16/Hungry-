@@ -9,12 +9,10 @@ class AuthGateCubit extends Cubit<AuthGateState> {
     final token=await LocalStorage.getToken();
 
     if(token==null||token.isEmpty){
-      print("AuthGate: User is Unauthenticated");
       emit(AuthGateState.unauthenticated());
       
 
     }else{
-            print("AuthGate: User is Authenticated");
 
       emit(AuthGateState.authenticated());
     }

@@ -18,7 +18,6 @@ class MyOrdersCubit extends Cubit<MyOrdersState> {
     response.when(
       success:(data) {
         emit(MyOrdersState.success(data));
-        print("My orders cubit loaded");
       },
        failure:(error) {
          emit(MyOrdersState.error(error: error.apiErrorModel.message));

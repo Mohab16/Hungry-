@@ -20,7 +20,6 @@ class SideOptionsCubit extends Cubit<SideOptionsState> {
       },
      failure:(error) {
        emit(SideOptionsState.error(error: error.apiErrorModel.message));
-                print(error);
 
      },
      );

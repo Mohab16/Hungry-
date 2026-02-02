@@ -18,7 +18,6 @@ class ToppingsCubit extends Cubit<ToppingsState> {
       },
        failure:(error) {
          emit(ToppingsState.error(error: error.apiErrorModel.message));
-         print(error);
        },
        );
   }
