@@ -177,7 +177,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  content: Text("Coming soon"),
+                  content: Text("Coming soon!"),
                 ),
               );
       },
