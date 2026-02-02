@@ -101,9 +101,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   price: double.parse(widget.product.price),
                 );
         
-                print(
-                  "productId: ${context.read<CartCubit>().productId}\nquantity: ${context.read<CartCubit>().quantity}\nsideOptions: ${context.read<CartCubit>().selectedSideOptions}\ntoppings: ${context.read<CartCubit>().selectedToppings}\nspicy: ${context.read<CartCubit>().spicyLevel}",
-                );
+                
         
                 context.read<CartCubit>().addProduct(selectedItem, {
                   selectedItem.productId: selectedItem.price,
