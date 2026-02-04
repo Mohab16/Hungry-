@@ -1,4 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<uses-permission android:name="android.permission.INTERNET"/>
+
 
     <!-- Internet (مهم جدًا) -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -41,6 +43,8 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    android:usesCleartextTraffic="true"
+
     
     <queries>
         <intent>
