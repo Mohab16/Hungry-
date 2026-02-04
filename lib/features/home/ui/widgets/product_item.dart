@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,8 +43,8 @@ class ProductItem extends StatelessWidget {
               ): 
               ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                child: Image.network(
-                  product.image,
+                child: CachedNetworkImage(
+                 imageUrl:  product.image,
                   width: 100.w,
                   height: 100.h,
                   fit: BoxFit.contain,

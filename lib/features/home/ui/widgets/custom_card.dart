@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry/core/helpers/spacing.dart';
@@ -96,8 +97,8 @@ class CustomCard extends StatelessWidget {
                 child: Center(
                   child: Padding(
                     padding: const EdgeInsets.all(6.0),
-                    child: Image.network(
-                      image!,
+                    child: CachedNetworkImage(
+                     imageUrl:  image!,
                       // loadingBuilder: (context, child, loadingProgress) {
                       //   if(loadingProgress==null) return child;
                       //   return Container(
@@ -109,7 +110,7 @@ class CustomCard extends StatelessWidget {
                       //     ),
                       //   );
                       // },
-                      errorBuilder: (context, error, stackTrace) {
+                      errorWidget: (context, error, stackTrace) {
                         return Container(
                           width: 55.w,
                           height: 45.h,

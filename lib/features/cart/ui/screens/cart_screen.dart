@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -133,17 +134,17 @@ class CartScreen extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.only(left: 12.w, top: 12.h),
                             child: ClipRRect(
-                              child: Image.network(
-                                findCartProducts()[index].image,
-                                loadingBuilder:
+                              child: CachedNetworkImage(
+                               imageUrl:  findCartProducts()[index].image,
+                                progressIndicatorBuilder:
                                     (context, child, loadingProgress) {
-                                      if (loadingProgress == null) return child;
+                                     
                               
                                       return Center(
                                         child: CircularProgressIndicator(),
                                       );
                                     },
-                                errorBuilder: (context, error, stackTrace) {
+                                errorWidget: (context, error, stackTrace) {
                                   return Center(
                                     child: CircularProgressIndicator(),
                                   );
