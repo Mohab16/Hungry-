@@ -6,14 +6,14 @@ class OrderItem {
   List<int>? toppings;
   List<int>? sideOptions;
 
-  OrderItem(
-      {this.productId,
-      this.quantity,
-      this.spicy,
-      this.toppings,
-      this.sideOptions,
-      this.price
-      });
+  OrderItem({
+    this.productId,
+    this.quantity,
+    this.spicy,
+    this.toppings,
+    this.sideOptions,
+    this.price,
+  });
 
   OrderItem.fromJson(Map<String, dynamic> json) {
     productId = json['product_id'];
@@ -21,6 +21,7 @@ class OrderItem {
     spicy = json['spicy'];
     toppings = json['toppings'].cast<int>();
     sideOptions = json['side_options'].cast<int>();
+    price = json['price'];
   }
 
   Map<String, dynamic> toJson() {
@@ -30,6 +31,7 @@ class OrderItem {
     data['spicy'] = this.spicy;
     data['toppings'] = this.toppings;
     data['side_options'] = this.sideOptions;
+    data['price'] = this.price;
     return data;
   }
 }

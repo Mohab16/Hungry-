@@ -108,7 +108,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     );
                     context.read<CartCubit>().decreaseItemQuantity(
                       selectedItem,
-                      widget.product.price,
                     );
                   },
                   onIncrease: () {
@@ -126,7 +125,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
                     context.read<CartCubit>().increaseItemQuantity(
                       selectedItem,
-                      widget.product.price,
                     );
                   },
                   quantity: state.quantity,
@@ -146,9 +144,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       price: double.parse(widget.product.price),
                     );
 
-                    context.read<CartCubit>().addProduct(selectedItem, {
-                      selectedItem.productId: selectedItem.price,
-                    });
+                    context.read<CartCubit>().addProduct(selectedItem);
                   },
                 );
               },

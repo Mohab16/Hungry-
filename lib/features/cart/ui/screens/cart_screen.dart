@@ -26,13 +26,9 @@ class CartScreen extends StatelessWidget {
                 .read<HomeProductsCubit>()
                 .allProducts;
             final List cartItems = context.read<CartCubit>().state.items;
-            final Map<int, double> productPrices = {
-              for (var product in allProducts)
-                product.id: double.parse(product.price),
-            };
             if (state.totalPrice == 0 && cartItems.isNotEmpty) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                context.read<CartCubit>().calcTotalPrice(productPrices);
+                context.read<CartCubit>().calcTotalPrice();
               });
             }
 
@@ -70,11 +66,7 @@ class CartScreen extends StatelessWidget {
                           ),
                         ),
                       )
-                    : _buildCartItemsListView(
-                        findCartProducts,
-                        cartItems,
-                        productPrices,
-                      ),
+                    : _buildCartItemsListView(findCartProducts, cartItems),
                 Padding(
                   padding: EdgeInsets.only(top: 20.w),
                   child: TotalPrice(
@@ -101,7 +93,6 @@ class CartScreen extends StatelessWidget {
   SizedBox _buildCartItemsListView(
     List<dynamic> Function() findCartProducts,
     List<dynamic> cartItems,
-    productPrices,
   ) {
     return SizedBox(
       height: 680.h,
@@ -193,10 +184,7 @@ class CartScreen extends StatelessWidget {
                                   onPressed: () {
                                     context
                                         .read<CartCubit>()
-                                        .decreaseItemQuantity(
-                                          cartItems[index],
-                                          productPrices,
-                                        );
+                                        .decreaseItemQuantity(cartItems[index]);
                                   },
                                   child: Padding(
                                     padding: EdgeInsets.only(bottom: 8.h),
@@ -241,10 +229,7 @@ class CartScreen extends StatelessWidget {
                                   onPressed: () {
                                     context
                                         .read<CartCubit>()
-                                        .increaseItemQuantity(
-                                          cartItems[index],
-                                          productPrices,
-                                        );
+                                        .increaseItemQuantity(cartItems[index]);
                                   },
                                   child: Icon(
                                     Icons.add,
@@ -268,10 +253,7 @@ class CartScreen extends StatelessWidget {
                               backgroundColor: MyColors.darkGreen,
                             ),
                             onPressed: () {
-                              context.read<CartCubit>().removeItem(
-                                index,
-                                productPrices,
-                              );
+                              context.read<CartCubit>().removeItem(index);
                             },
                             child: Text(
                               "Remove",
