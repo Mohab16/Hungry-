@@ -15,10 +15,7 @@ import 'package:hungry/features/checkout/ui/widgets/checkout_bloc_listener.dart'
 
 class CheckoutScreen extends StatefulWidget {
   final double price;
-  const CheckoutScreen({
-    super.key,
-    required this.price,
-  });
+  const CheckoutScreen({super.key, required this.price});
 
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
@@ -31,11 +28,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     super.initState();
     context.read<CheckoutCubit>();
   }
+
   @override
-  
   Widget build(BuildContext context) {
-      final double totalPrice=widget.price+20;
-  final orderList=context.read<CartCubit>().state.items;
+    final double totalPrice = widget.price + 20;
+    final orderList = context.read<CartCubit>().state.items;
 
     return CheckoutBlocListener(
       child: Scaffold(
@@ -51,7 +48,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-            
+
                     children: [
                       Text(
                         "Order summary",
@@ -69,14 +66,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               MyStyles.font18RobotoGreyRegular,
                             ),
                             verticalSpacing(15),
-                            
+
                             _buildTextRow(
                               "Delivery fees",
                               "20.0 LE",
                               MyStyles.font18RobotoGreyRegular,
                             ),
                             verticalSpacing(10),
-                            Container(color: MyColors.moreMediumGrey, height: 1.h),
+                            Container(
+                              color: MyColors.moreMediumGrey,
+                              height: 1.h,
+                            ),
                             verticalSpacing(20),
                             _buildTextRow(
                               "Total:",
@@ -117,15 +117,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         "Debit card",
                         "Debit card",
                       ),
-                     verticalSpacing(185),
-                      TotalPrice(buttonText: "Checkout", price: "$totalPrice",onPressed: (){
-                        if(selectedPaymentMethod!=""){
-                         context.read<CheckoutCubit>().emitCheckoutState(
-                          CheckOutBodyModel(items: orderList)
-                         );
-                        }
-                      },),
-                      
+                      verticalSpacing(185),
+                      TotalPrice(
+                        quantity: 0,
+                        buttonText: "Checkout",
+                        price: "$totalPrice",
+                        onPressed: () {
+                          if (selectedPaymentMethod != "") {
+                            context.read<CheckoutCubit>().emitCheckoutState(
+                              CheckOutBodyModel(items: orderList),
+                            );
+                          }
+                        },
+                      ),
                     ],
                   ),
                 ),
