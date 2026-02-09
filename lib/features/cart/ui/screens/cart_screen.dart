@@ -80,9 +80,12 @@ class CartScreen extends StatelessWidget {
                   child: TotalPrice(
                     buttonText: "Go to checkout",
                     price: state.totalPrice.toString(),
-                    onPressed: (){
-                      if(cartItems.isNotEmpty){
-                      context.pushNamed(Routes.checkoutScreen, arguments: state.totalPrice);
+                    onPressed: () {
+                      if (cartItems.isNotEmpty) {
+                        context.pushNamed(
+                          Routes.checkoutScreen,
+                          arguments: state.totalPrice,
+                        );
                       }
                     },
                   ),
@@ -135,11 +138,9 @@ class CartScreen extends StatelessWidget {
                             padding: EdgeInsets.only(left: 12.w, top: 12.h),
                             child: ClipRRect(
                               child: CachedNetworkImage(
-                               imageUrl:  findCartProducts()[index].image,
+                                imageUrl: findCartProducts()[index].image,
                                 progressIndicatorBuilder:
                                     (context, child, loadingProgress) {
-                                     
-                              
                                       return Center(
                                         child: CircularProgressIndicator(),
                                       );
@@ -171,7 +172,7 @@ class CartScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(top: 35.h,right: 20.w),
+                            padding: EdgeInsets.only(top: 35.h, right: 20.w),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -193,7 +194,7 @@ class CartScreen extends StatelessWidget {
                                     context
                                         .read<CartCubit>()
                                         .decreaseItemQuantity(
-                                          index,
+                                          cartItems[index],
                                           productPrices,
                                         );
                                   },
@@ -241,7 +242,7 @@ class CartScreen extends StatelessWidget {
                                     context
                                         .read<CartCubit>()
                                         .increaseItemQuantity(
-                                          index,
+                                          cartItems[index],
                                           productPrices,
                                         );
                                   },

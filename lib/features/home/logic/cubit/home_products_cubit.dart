@@ -10,20 +10,20 @@ class HomeProductsCubit extends Cubit<HomeProductsState> {
   String? token = "";
   String? userName = "";
   String? userImage = "";
-  List allProducts=[];
-  List filteredProducts=[];
-  String selectedCategory="All";
+  List allProducts = [];
+  List filteredProducts = [];
+  String selectedCategory = "All";
   final Map<String, List<int>> categoryMap = {
-    'All':[],
-  'Burgers': [1,2,3,4,5,6,7,8,9,10],
-  'Sandwiches': [11,12,13],
-  'Wraps': [14,15,16,17],
-  'Sides': [18,19,20,21],
-  'Salads': [22,23,24],
-  'Combos': [25,26,27,28],
-  'Drinks': [29,30,31,32],
-  'Desserts': [33,34],
-};
+    'All': [],
+    'Burgers': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    'Sandwiches': [11, 12, 13],
+    'Wraps': [14, 15, 16, 17],
+    'Sides': [18, 19, 20, 21],
+    'Salads': [22, 23, 24],
+    'Combos': [25, 26, 27, 28],
+    'Drinks': [29, 30, 31, 32],
+    'Desserts': [33, 34],
+  };
   HomeProductsCubit(this._homeProductsRepo)
     : super(HomeProductsState.initial());
   TextEditingController searchController = TextEditingController();
@@ -32,13 +32,12 @@ class HomeProductsCubit extends Cubit<HomeProductsState> {
     userName = await LocalStorage.getUserName();
     userImage = await LocalStorage.getUserImage();
 
-
     emit(HomeProductsState.loading());
     final response = await _homeProductsRepo.fetchProducts();
     response.when(
       success: (data) {
-        allProducts=data.data!;
-        filteredProducts=data.data!;
+        allProducts = data.data!;
+        filteredProducts = data.data!;
         emit(HomeProductsState.success(products: filteredProducts));
       },
       failure: (error) {
@@ -47,27 +46,26 @@ class HomeProductsCubit extends Cubit<HomeProductsState> {
     );
   }
 
-  void filterProducts(String? category, String? searchQuery){
-    if(category!=null){
-      selectedCategory=category;
+  void filterProducts(String? category, String? searchQuery) {
+    if (category != null) {
+      selectedCategory = category;
     }
-    List tempList=List.from(allProducts);
-    if(selectedCategory!='All'){
-      final ids=categoryMap[selectedCategory]??[];
-      tempList=tempList.where((product){
-     return ids.contains(product.id);
+    List tempList = List.from(allProducts);
+    if (selectedCategory != 'All') {
+      final ids = categoryMap[selectedCategory] ?? [];
+      tempList = tempList.where((product) {
+        return ids.contains(product.id);
       }).toList();
     }
-    if(searchQuery!=null){
-      final query=searchQuery.toLowerCase();
-      tempList=tempList.where((product) {
-   return product.name.toLowerCase().contains(query);
+    if (searchQuery != null) {
+      final query = searchQuery.toLowerCase();
+      tempList = tempList.where((product) {
+        return product.name.toLowerCase().contains(query);
       }).toList();
     }
-    filteredProducts=tempList;
+    filteredProducts = tempList;
     emit(HomeProductsState.success(products: filteredProducts));
   }
-
 
   // void searchProducts(String query){
   //   if(query.isEmpty){

@@ -8,6 +8,7 @@ import 'package:hungry/features/cart/ui/screens/cart_screen.dart';
 import 'package:hungry/features/checkout/logic/cubit/checkout_cubit.dart';
 import 'package:hungry/features/checkout/ui/screens/checkout_screen.dart';
 import 'package:hungry/features/home/logic/cubit/home_products_cubit.dart';
+import 'package:hungry/features/home/logic/cubit/product_details_cubit.dart';
 import 'package:hungry/features/home/logic/cubit/side_options_cubit.dart';
 import 'package:hungry/features/home/logic/cubit/toppings_cubit.dart';
 import 'package:hungry/features/home/ui/screens/home_screen.dart';
@@ -68,6 +69,7 @@ class AppRouter {
             providers: [
               BlocProvider(create: (context) => getIt<ToppingsCubit>()),
               BlocProvider(create: (context) => getIt<SideOptionsCubit>()),
+              BlocProvider(create: (context) => ProductDetailsCubit()),
             ],
             child: ProductDetailsScreen(product: product),
           ),

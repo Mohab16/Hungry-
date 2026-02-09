@@ -9,22 +9,21 @@ class CartCubit extends Cubit<CartState> {
   double spicyLevel = 0.5;
   int productId = -50;
   int quantity = 1;
+  bool isExpanded = false;
 
-   
-
-
-
-  void addProduct(OrderItem item,productPrices) {
+  void addProduct(OrderItem item, productPrices) {
     final items = List<OrderItem>.from(state.items);
 
     final index = items.indexWhere((item) => item.productId == productId);
+
+    isExpanded = true;
 
     if (index != -1) {
       items[index].quantity = (items[index].quantity ?? 0) + 1;
     } else {
       items.add(item);
     }
-        calcTotalPrice(productPrices);
+    calcTotalPrice(productPrices);
 
     emit(CartState(items));
     clearSelection();
@@ -63,58 +62,58 @@ class CartCubit extends Cubit<CartState> {
     emit(CartState(state.items, spicyLevel: level));
   }
 
-  void increaseItemQuantity(int index,productPrices) {
+  void increaseItemQuantity(OrderItem item, productPrices) {
+    final index = state.items.indexWhere(
+      (element) => element.productId == item.productId,
+    );
+
     if (index < 0 || index >= state.items.length) return;
 
-    final items = List<OrderItem>.from(state.items);
-    items[index].quantity = (items[index].quantity ?? 0) + 1;
+    state.items[index].quantity = (state.items[index].quantity ?? 0) + 1;
+    emit(CartState(state.items));
+    calcTotalPrice(productPrices);
+  }
+
+  void decreaseItemQuantity(OrderItem item, productPrices) {
+    final index = state.items.indexWhere(
+      (element) => element.productId == item.productId,
+    );
+    if (index < 0 || index >= state.items.length) return;
+
+    final newQty = (state.items[index].quantity ?? 0) - 1;
+
+    if (newQty <= 0) {
+      state.items.removeAt(index);
+    } else {
+      state.items[index].quantity = newQty;
+    }
+
+    emit(CartState(state.items));
+    calcTotalPrice(productPrices);
+  }
+
+  void removeItem(int index, productPrices) {
+    final items = state.items;
+    items.removeAt(index);
     emit(CartState(items));
     calcTotalPrice(productPrices);
   }
 
-  void decreaseItemQuantity(int index,productPrices) {
-    if (index < 0 || index >= state.items.length) return;
+  void calcTotalPrice(Map<int?, double?> productPrices) {
+    double total = 0;
+    for (var item in state.items) {
+      final price = productPrices[item.productId] ?? 0;
+      total += (item.quantity ?? 0) * price;
+    }
 
-    final items = List<OrderItem>.from(state.items);
-
-      final newQty = (items[index].quantity ?? 0) - 1;
-
-      if(newQty<=0){
-        items.removeAt(index);
-      }else{
-        items[index].quantity=newQty;
-      }
-
-
-      emit(CartState(items));
-          calcTotalPrice(productPrices);
-
-    
+    emit(
+      CartState(
+        List.from(state.items), // نسخ الـ items عشان Immutable
+        totalPrice: total,
+      ),
+    );
   }
 
-  void removeItem(int index,productPrices){
-    final items=state.items;
-    items.removeAt(index);
-    emit(CartState(items));
-        calcTotalPrice(productPrices);
-
-  }
-
- void calcTotalPrice(Map<int?, double?> productPrices) {
-  double total = 0;
-  for (var item in state.items) {
-    final price=productPrices[item.productId]??0;
-    total+=(item.quantity??0)*price;
-  }
-
-  emit(
-    CartState(
-      List.from(state.items), // نسخ الـ items عشان Immutable
-      totalPrice: total,
-
-    ),
-  );
-}
   void clearSelection() {
     selectedToppings = [];
     selectedSideOptions = [];
@@ -122,7 +121,7 @@ class CartCubit extends Cubit<CartState> {
     productId = -50;
   }
 
-  void emptyCart(){
+  void emptyCart() {
     emit(CartState([]));
     clearSelection();
   }
