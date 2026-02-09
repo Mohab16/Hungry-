@@ -11,7 +11,7 @@ class CartCubit extends Cubit<CartState> {
   int quantity = 1;
   bool isExpanded = false;
 
-  void addProduct(OrderItem item, productPrices) {
+  void addProduct(OrderItem item) {
     final items = List<OrderItem>.from(state.items);
 
     final index = items.indexWhere((item) => item.productId == productId);
@@ -23,7 +23,7 @@ class CartCubit extends Cubit<CartState> {
     } else {
       items.add(item);
     }
-    calcTotalPrice(productPrices);
+    calcTotalPrice();
 
     emit(CartState(items));
     clearSelection();
@@ -62,7 +62,7 @@ class CartCubit extends Cubit<CartState> {
     emit(CartState(state.items, spicyLevel: level));
   }
 
-  void increaseItemQuantity(OrderItem item, productPrices) {
+  void increaseItemQuantity(OrderItem item) {
     final index = state.items.indexWhere(
       (element) => element.productId == item.productId,
     );
@@ -71,10 +71,10 @@ class CartCubit extends Cubit<CartState> {
 
     state.items[index].quantity = (state.items[index].quantity ?? 0) + 1;
     emit(CartState(state.items));
-    calcTotalPrice(productPrices);
+    calcTotalPrice();
   }
 
-  void decreaseItemQuantity(OrderItem item, productPrices) {
+  void decreaseItemQuantity(OrderItem item) {
     final index = state.items.indexWhere(
       (element) => element.productId == item.productId,
     );
@@ -89,20 +89,20 @@ class CartCubit extends Cubit<CartState> {
     }
 
     emit(CartState(state.items));
-    calcTotalPrice(productPrices);
+    calcTotalPrice();
   }
 
-  void removeItem(int index, productPrices) {
+  void removeItem(int index) {
     final items = state.items;
     items.removeAt(index);
     emit(CartState(items));
-    calcTotalPrice(productPrices);
+    calcTotalPrice();
   }
 
-  void calcTotalPrice(Map<int?, double?> productPrices) {
+  void calcTotalPrice() {
     double total = 0;
     for (var item in state.items) {
-      final price = productPrices[item.productId] ?? 0;
+      final price = item.price ?? 0;
       total += (item.quantity ?? 0) * price;
     }
 
