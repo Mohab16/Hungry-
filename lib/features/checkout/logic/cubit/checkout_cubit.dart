@@ -12,7 +12,6 @@ class CheckoutCubit extends Cubit<CheckoutState> {
   List<OrderItem>  ordersList=[];
 
   emitCheckoutState(CheckOutBodyModel checkoutBodyModel) async {
-    print(ordersList);
     emit(CheckoutState.loading());
     final response = await _checkoutRepo.checkout(checkoutBodyModel);
     response.when(

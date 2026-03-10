@@ -43,6 +43,7 @@ class ProductsGridView extends StatelessWidget {
           itemBuilder: (context, index) {
             return Skeletonizer(
               enabled: isLoading,
+              
               child: GestureDetector(
                 onTap: () => context.pushNamed(
                   Routes.productDetailsScreen,

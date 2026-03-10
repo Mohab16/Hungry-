@@ -8,23 +8,33 @@ import 'package:hungry/features/cart/ui/screens/cart_screen.dart';
 import 'package:hungry/features/checkout/logic/cubit/checkout_cubit.dart';
 import 'package:hungry/features/checkout/ui/screens/checkout_screen.dart';
 import 'package:hungry/features/home/logic/cubit/home_products_cubit.dart';
+import 'package:hungry/features/home/logic/cubit/product_details_cubit.dart';
 import 'package:hungry/features/home/logic/cubit/side_options_cubit.dart';
 import 'package:hungry/features/home/logic/cubit/toppings_cubit.dart';
 import 'package:hungry/features/home/ui/screens/home_screen.dart';
 import 'package:hungry/features/home/ui/screens/product_details_screen.dart';
 import 'package:hungry/features/login/logic/cubit/login_cubit.dart';
 import 'package:hungry/features/login/ui/screens/login_screen.dart';
+import 'package:hungry/features/my_orders/logic/cubit/my_order_details_cubit.dart';
+import 'package:hungry/features/my_orders/ui/screens/my_order_details_screen.dart';
 import 'package:hungry/features/onboarding/ui/screens/onboarding_screen.dart';
 import 'package:hungry/features/signup/logic/cubit/signup_cubit.dart';
 import 'package:hungry/features/signup/ui/screens/signup_screen.dart';
 
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
-    // ignore: unused_local_variable
     final arguments = settings.arguments;
     switch (settings.name) {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(builder: (_) => OnboardingScreen());
+      case Routes.myOrderDetailsScreen:
+        final orderId = arguments.toString();
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<MyOrderDetailsCubit>(),
+            child: MyOrderDetailsScreen(id: orderId),
+          ),
+        );
       case Routes.checkoutScreen:
         final price = arguments as double;
         return MaterialPageRoute(
@@ -68,6 +78,7 @@ class AppRouter {
             providers: [
               BlocProvider(create: (context) => getIt<ToppingsCubit>()),
               BlocProvider(create: (context) => getIt<SideOptionsCubit>()),
+              BlocProvider(create: (context) => ProductDetailsCubit()),
             ],
             child: ProductDetailsScreen(product: product),
           ),

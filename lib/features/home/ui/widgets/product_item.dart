@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,17 +32,23 @@ class ProductItem extends StatelessWidget {
           children: [
             // الصورة
             Center(
-              child:product==null? Image.asset(
-                "assets/images/burger.png",
-                width: 100.w,
-                height: 100.h,
-                fit: BoxFit.contain,
+              child:product==null? ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.asset(
+                  "assets/images/burger.png",
+                  width: 100.w,
+                  height: 100.h,
+                  fit: BoxFit.contain,
+                ),
               ): 
-              Image.network(
-                product.image,
-                width: 100.w,
-                height: 100.h,
-                fit: BoxFit.contain,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: CachedNetworkImage(
+                 imageUrl:  product.image,
+                  width: 100.w,
+                  height: 100.h,
+                  fit: BoxFit.contain,
+                ),
               )
             ),
     

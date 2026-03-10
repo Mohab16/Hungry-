@@ -8,6 +8,8 @@ import 'package:hungry/core/widgets/custom_back_button.dart';
 import 'package:hungry/core/widgets/total_price.dart';
 import 'package:hungry/features/cart/data/models/order_item_model.dart';
 import 'package:hungry/features/cart/logic/cubit/cart_cubit.dart';
+import 'package:hungry/features/home/logic/cubit/product_details_cubit.dart';
+import 'package:hungry/features/home/logic/cubit/product_details_state.dart';
 import 'package:hungry/features/home/logic/cubit/side_options_cubit.dart';
 import 'package:hungry/features/home/logic/cubit/toppings_cubit.dart';
 import 'package:hungry/features/home/ui/widgets/customize_food_and_slider.dart';
@@ -24,6 +26,7 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  int quantity = 0;
   @override
   void initState() {
     super.initState();
@@ -37,12 +40,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     return Scaffold(
       backgroundColor: MyColors.lightestGrey,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomBackButton(),
-              Column(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomBackButton(),
+            SingleChildScrollView(
+              child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -58,59 +61,94 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   ),
                 ],
               ),
-              verticalSpacing(50),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 20.w),
-                    child: Text(
-                      "Toppings",
-                      style: MyStyles.font18RobotoRedBricksSemiBold,
-                      textAlign: TextAlign.start,
-                    ),
+            ),
+            verticalSpacing(25),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 20.w),
+                  child: Text(
+                    "Toppings",
+                    style: MyStyles.font18RobotoRedBricksSemiBold,
+                    textAlign: TextAlign.start,
                   ),
-                  verticalSpacing(20),
-                  Toppings(),
-                  verticalSpacing(30),
-                  Padding(
-                    padding: EdgeInsets.only(left: 20.w),
-                    child: Text(
-                      "Side options",
-                      style: MyStyles.font18RobotoRedBricksSemiBold,
-                      textAlign: TextAlign.start,
-                    ),
+                ),
+                verticalSpacing(20),
+                Toppings(),
+                verticalSpacing(30),
+                Padding(
+                  padding: EdgeInsets.only(left: 20.w),
+                  child: Text(
+                    "Side options",
+                    style: MyStyles.font18RobotoRedBricksSemiBold,
+                    textAlign: TextAlign.start,
                   ),
-                  SideOptions(),
-                ],
-              ),
-              verticalSpacing(35),
+                ),
+                SideOptions(),
+              ],
+            ),
+            verticalSpacing(35),
 
-              TotalPrice(
-                buttonText: "Add to cart",
-                price: widget.product.price,
-                onPressed: () {
-                  context.read<CartCubit>().productId = widget.product.id;
-                  final selectedItem = OrderItem(
-                    productId: context.read<CartCubit>().productId,
-                    quantity: context.read<CartCubit>().quantity,
-                    spicy: context.read<CartCubit>().spicyLevel,
-                    toppings: context.read<CartCubit>().selectedToppings,
-                    sideOptions: context.read<CartCubit>().selectedSideOptions,
-                    price: double.parse(widget.product.price),
-                  );
+            BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
+              builder: (context, state) {
+                return TotalPrice(
+                  onDecrease: () {
+                    context.read<ProductDetailsCubit>().decreaseQuantity();
+                    var selectedItem = OrderItem(
+                      productId: widget.product.id,
+                      quantity: state.quantity,
+                      spicy: context.read<CartCubit>().spicyLevel,
+                      toppings: context.read<CartCubit>().selectedToppings,
+                      sideOptions: context
+                          .read<CartCubit>()
+                          .selectedSideOptions,
+                      price: double.parse(widget.product.price),
+                    );
+                    context.read<CartCubit>().decreaseItemQuantity(
+                      selectedItem,
+                    );
+                  },
+                  onIncrease: () {
+                    context.read<ProductDetailsCubit>().increaseQuantity();
+                    var selectedItem = OrderItem(
+                      productId: widget.product.id,
+                      quantity: state.quantity,
+                      spicy: context.read<CartCubit>().spicyLevel,
+                      toppings: context.read<CartCubit>().selectedToppings,
+                      sideOptions: context
+                          .read<CartCubit>()
+                          .selectedSideOptions,
+                      price: double.parse(widget.product.price),
+                    );
 
-                  print(
-                    "productId: ${context.read<CartCubit>().productId}\nquantity: ${context.read<CartCubit>().quantity}\nsideOptions: ${context.read<CartCubit>().selectedSideOptions}\ntoppings: ${context.read<CartCubit>().selectedToppings}\nspicy: ${context.read<CartCubit>().spicyLevel}",
-                  );
+                    context.read<CartCubit>().increaseItemQuantity(
+                      selectedItem,
+                    );
+                  },
+                  quantity: state.quantity,
+                  buttonText: "Add to cart",
+                  price: widget.product.price,
+                  onPressed: () {
+                    context.read<ProductDetailsCubit>().increaseQuantity();
+                    context.read<CartCubit>().productId = widget.product.id;
+                    var selectedItem = OrderItem(
+                      productId: context.read<CartCubit>().productId,
+                      quantity: 1,
+                      spicy: context.read<CartCubit>().spicyLevel,
+                      toppings: context.read<CartCubit>().selectedToppings,
+                      sideOptions: context
+                          .read<CartCubit>()
+                          .selectedSideOptions,
+                      price: double.parse(widget.product.price),
+                    );
 
-                  context.read<CartCubit>().addProduct(selectedItem, {
-                    selectedItem.productId: selectedItem.price,
-                  });
-                },
-              ),
-            ],
-          ),
+                    context.read<CartCubit>().addProduct(selectedItem);
+                  },
+                );
+              },
+            ),
+          ],
         ),
       ),
     );

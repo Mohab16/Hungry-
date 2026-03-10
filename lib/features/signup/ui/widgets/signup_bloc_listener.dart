@@ -45,7 +45,7 @@ class SignupBlocListener extends StatelessWidget {
               return  AlertDialog(
           icon: Icon(Icons.check_circle, color: MyColors.darkGreen, size: 32),
           content: Text(
-            "Signedup successfully",
+            "Signed up successfully",
             style: MyStyles.font18RobotoDarkGreenSemiBold,
             textAlign: TextAlign.center,
           ),
