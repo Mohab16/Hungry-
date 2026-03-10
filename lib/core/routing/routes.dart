@@ -7,4 +7,5 @@ class Routes {
   static const productDetailsScreen = '/productDetailsScreen';
   static const cartScreen = '/cartScreen';
   static const checkoutScreen = '/checkoutScreen';
+  static const myOrderDetailsScreen = '/myOrderDetailsScreen';
 }

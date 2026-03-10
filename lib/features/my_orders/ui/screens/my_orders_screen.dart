@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry/core/helpers/extensions.dart';
 import 'package:hungry/core/helpers/spacing.dart';
+import 'package:hungry/core/routing/routes.dart';
 import 'package:hungry/core/themes/my_colors.dart';
 import 'package:hungry/core/themes/my_styles.dart';
 import 'package:hungry/core/widgets/custom_back_button.dart';
@@ -28,20 +29,19 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
       backgroundColor: MyColors.lightestGrey,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.w),
               child: Column(
                 children: [
                   Align(
                     alignment: Alignment.topLeft,
-                    child: CustomBackButton()),
+                    child: CustomBackButton(),
+                  ),
                   verticalSpacing(10),
                   Align(
                     alignment: Alignment.topLeft,
@@ -57,9 +57,9 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
             verticalSpacing(10),
             BlocBuilder<MyOrdersCubit, MyOrdersState>(
               builder: (context, state) {
-               final isLoading= state.maybeWhen(
-                  success:(data) =>  false,
-                  orElse:() =>  true
+                final isLoading = state.maybeWhen(
+                  success: (data) => false,
+                  orElse: () => true,
                 );
                 return Expanded(
                   child: Skeletonizer(
@@ -75,18 +75,29 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                         return state.when(
                           initial: () => SizedBox.shrink(),
                           success: (data) {
-                            return CustomListTile(
-                              isLoading: isLoading,
-                              imageUrl: data.data[index].productImage,
-                              createdAt: data.data[index].createdAt,
-                              totalPrice: addDeliveryFees(data.data[index].totalPrice),
+                            return GestureDetector(
+                              onTap: () {
+                                context.pushNamed(
+                                  Routes.myOrderDetailsScreen,
+                                  arguments: data.data[index].id,
+                                );
+                              },
+                              child: CustomListTile(
+                                isLoading: isLoading,
+                                imageUrl: data.data[index].productImage,
+                                createdAt: data.data[index].createdAt,
+                                totalPrice: addDeliveryFees(
+                                  data.data[index].totalPrice,
+                                ),
+                              ),
                             );
                           },
-                          loading: () =>CustomListTile( 
+                          loading: () => CustomListTile(
                             isLoading: isLoading,
-                             imageUrl: 'https://via.placeholder.com/150', 
-              createdAt: '2024-01-01', 
-              totalPrice: '99.99', ),
+                            imageUrl: 'https://via.placeholder.com/150',
+                            createdAt: '2024-01-01',
+                            totalPrice: '99.99',
+                          ),
                           error: (error) {
                             showDialog(
                               context: context,
@@ -99,7 +110,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                                   ),
                                   content: Text(
                                     error,
-                                    style: MyStyles.font18RobotoDarkGreenSemiBold,
+                                    style:
+                                        MyStyles.font18RobotoDarkGreenSemiBold,
                                     textAlign: TextAlign.center,
                                   ),
                                   actions: [
@@ -117,7 +129,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                                 );
                               },
                             );
-                    
+
                             return SizedBox.shrink();
                           },
                         );
@@ -133,9 +145,9 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
     );
   }
 }
-String addDeliveryFees(String oldPrice){
-  final orderPrice=double.parse(oldPrice);
-  final finalPrice=(orderPrice+20).toString();
-  return finalPrice;
 
+String addDeliveryFees(String oldPrice) {
+  final orderPrice = double.parse(oldPrice);
+  final finalPrice = (orderPrice + 20).toString();
+  return finalPrice;
 }
