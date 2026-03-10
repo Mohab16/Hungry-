@@ -8,7 +8,6 @@ import 'package:hungry/core/widgets/custom_back_button.dart';
 import 'package:hungry/core/widgets/total_price.dart';
 import 'package:hungry/features/cart/data/models/order_item_model.dart';
 import 'package:hungry/features/cart/logic/cubit/cart_cubit.dart';
-import 'package:hungry/features/cart/logic/cubit/cart_state.dart';
 import 'package:hungry/features/home/logic/cubit/product_details_cubit.dart';
 import 'package:hungry/features/home/logic/cubit/product_details_state.dart';
 import 'package:hungry/features/home/logic/cubit/side_options_cubit.dart';

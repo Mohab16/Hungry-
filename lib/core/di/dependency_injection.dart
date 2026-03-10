@@ -13,7 +13,9 @@ import 'package:hungry/features/home/logic/cubit/side_options_cubit.dart';
 import 'package:hungry/features/home/logic/cubit/toppings_cubit.dart';
 import 'package:hungry/features/login/data/repos/login_repo.dart';
 import 'package:hungry/features/login/logic/cubit/login_cubit.dart';
+import 'package:hungry/features/my_orders/data/repos/my_order_details_repo.dart';
 import 'package:hungry/features/my_orders/data/repos/my_orders_repo.dart';
+import 'package:hungry/features/my_orders/logic/cubit/my_order_details_cubit.dart';
 import 'package:hungry/features/my_orders/logic/cubit/my_orders_cubit.dart';
 import 'package:hungry/features/signup/data/repo/signup_repo.dart';
 import 'package:hungry/features/signup/logic/cubit/signup_cubit.dart';
@@ -30,25 +32,52 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt<LoginRepo>()));
 
   // Signup
-  getIt.registerLazySingleton<SignupRepo>(() => SignupRepo(getIt<ApiService>()));
+  getIt.registerLazySingleton<SignupRepo>(
+    () => SignupRepo(getIt<ApiService>()),
+  );
   getIt.registerFactory<SignupCubit>(() => SignupCubit(getIt<SignupRepo>()));
   // Home screen products
-  getIt.registerLazySingleton<HomeProductsRepo>(() => HomeProductsRepo(getIt<ApiService>()));
-  getIt.registerFactory<HomeProductsCubit>(() => HomeProductsCubit(getIt<HomeProductsRepo>()));
+  getIt.registerLazySingleton<HomeProductsRepo>(
+    () => HomeProductsRepo(getIt<ApiService>()),
+  );
+  getIt.registerFactory<HomeProductsCubit>(
+    () => HomeProductsCubit(getIt<HomeProductsRepo>()),
+  );
   // Toppings
-  getIt.registerLazySingleton<ToppingsRepo>(() => ToppingsRepo(getIt<ApiService>()));
-  getIt.registerFactory<ToppingsCubit>(() => ToppingsCubit(getIt<ToppingsRepo>()));
+  getIt.registerLazySingleton<ToppingsRepo>(
+    () => ToppingsRepo(getIt<ApiService>()),
+  );
+  getIt.registerFactory<ToppingsCubit>(
+    () => ToppingsCubit(getIt<ToppingsRepo>()),
+  );
   // Side options
-  getIt.registerLazySingleton<SideOptionsRepo>(() => SideOptionsRepo(getIt<ApiService>()));
-  getIt.registerFactory<SideOptionsCubit>(() => SideOptionsCubit(getIt<SideOptionsRepo>()));
+  getIt.registerLazySingleton<SideOptionsRepo>(
+    () => SideOptionsRepo(getIt<ApiService>()),
+  );
+  getIt.registerFactory<SideOptionsCubit>(
+    () => SideOptionsCubit(getIt<SideOptionsRepo>()),
+  );
   //Auth gate
   getIt.registerFactory<AuthGateCubit>(() => AuthGateCubit());
   //Checkout
-  getIt.registerLazySingleton<CheckoutRepo>(() => CheckoutRepo(getIt<ApiService>()));
-  getIt.registerFactory<CheckoutCubit>(() => CheckoutCubit(getIt<CheckoutRepo>()));
+  getIt.registerLazySingleton<CheckoutRepo>(
+    () => CheckoutRepo(getIt<ApiService>()),
+  );
+  getIt.registerFactory<CheckoutCubit>(
+    () => CheckoutCubit(getIt<CheckoutRepo>()),
+  );
   //My orders
-  getIt.registerLazySingleton<MyOrdersRepo>(() => MyOrdersRepo(getIt<ApiService>()));
-  getIt.registerFactory<MyOrdersCubit>(() => MyOrdersCubit(getIt<MyOrdersRepo>()));
-  
-
+  getIt.registerLazySingleton<MyOrdersRepo>(
+    () => MyOrdersRepo(getIt<ApiService>()),
+  );
+  getIt.registerFactory<MyOrdersCubit>(
+    () => MyOrdersCubit(getIt<MyOrdersRepo>()),
+  );
+  //My order details
+  getIt.registerLazySingleton<MyOrderDetailsRepo>(
+    () => MyOrderDetailsRepo(getIt<ApiService>()),
+  );
+  getIt.registerFactory<MyOrderDetailsCubit>(
+    () => MyOrderDetailsCubit(getIt<MyOrderDetailsRepo>()),
+  );
 }
